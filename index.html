@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Profile Card - Phạm Ngọc Huỳnh</title>
+    <style>
+        /* === CÀI ĐẶT CƠ BẢN (RESET & MOBILE OPTIMIZATION) === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent; /* Tắt màu nền khi nhấn trên di động */
+        }
+        /* === CẬP NHẬT BODY ÁP DỤNG PHÔNG CHỮ MỚI === */
+       body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Phông chữ mặc định */
+            background: linear-gradient(135deg, #ffc0cb 0%, #a6c1ee 100%); /* Giữ nguyên nền hồng - xanh */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px; 
+            color: #333;
+        }
+        h1 {
+            color: #2e1065; /* Vẫn giữ màu tím đen sang trọng, đậm nét */
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: normal; /* Đưa khoảng cách chữ về bình thường */
+            
+            background: none; 
+            -webkit-text-fill-color: initial; 
+        }
+
+        /* === MÀU CHỮ THÔNG TIN MỚI === */
+        .info-list p {
+            font-size: 0.95rem;
+            color: #4b5563; /* Màu xám tro, nét chữ mềm mại, dễ đọc không mỏi mắt */
+            margin-bottom: 12px;
+            line-height: 1.6;
+            display: flex; 
+            align-items: flex-start;
+        }
+
+        /* === MÀU CHỮ TIÊU ĐỀ IN ĐẬM MỚI === */
+        .info-list strong {
+            font-weight: 600; /* In đậm vừa phải, thanh thoát hơn */
+            color: #4338ca; /* Màu xanh Indigo (xanh tím) làm điểm nhấn rất Tây */
+            min-width: 95px; 
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .container {
+            /* Hiệu ứng Kính trong suốt (Glassmorphism) */
+            background: rgba(255, 255, 255, 0.4); /* Màu trắng trong suốt 40% */
+            backdrop-filter: blur(12px); /* Làm mờ dải màu phía sau thẻ */
+            -webkit-backdrop-filter: blur(12px); /* Hỗ trợ mờ trên Safari/iPhone */
+            border: 1px solid rgba(255, 255, 255, 0.6); /* Viền thẻ màu trắng mờ */
+            
+            width: 100%;
+            max-width: 360px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Đổ bóng thẻ */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Phần dưới mình giữ nguyên, bạn chỉ cần thay đổi phần trên của .container */
+
+        /* ... các CSS khác của cột trái, cột phải, h1 giữ nguyên ... */
+
+        /* === DANH SÁCH THÔNG TIN CÁ NHÂN === */
+        .info-list {
+            text-align: left;
+            /* Đổi nền danh sách thông tin thành trong suốt cho đồng bộ với thẻ kính */
+            background-color: rgba(255, 255, 255, 0.5); 
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* === CỘT TRÁI (BÂY GIỜ LÀ PHẦN TRÊN: ẢNH) === */
+        .left-column {
+            margin-bottom: 20px;
+        }
+
+       .left-column img {
+            width: 120px; /* Kích thước ảnh */
+            height: 120px;
+            display: block;
+            object-fit: cover; /* Phủ kín khung tròn */
+            object-position: center 15%; /* ĐIỂM QUAN TRỌNG: Kéo trọng tâm ảnh lên phía trên 15% để lấy trọn phần đầu */
+            border-radius: 50%; /* Bo tròn ảnh */
+            border: 4px solid #4a6fe3;
+            box-shadow: 0 4px 10px rgba(74, 111, 227, 0.2);
+        }
+
+        /* === CỘT PHẢI (BÂY GIỜ LÀ PHẦN DƯỚI: THÔNG TIN) === */
+        .right-column {
+            width: 100%;
+            text-align: center; /* Căn giữa toàn bộ chữ */
+        }
+        /* Xử lý dòng cuối (Sở thích) */
+        .info-list p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* === BIỂU TƯỢNG MẠNG XÃ HỘI (SOCIAL ICONS) === */
+        .social-icons {
+            display: flex;
+            justify-content: center; /* Căn giữa 5 icon */
+            gap: 12px; /* Khoảng cách giữa các icon */
+            width: 100%;
+            padding-top: 10px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        /* Hiệu ứng phóng to nhẹ khi nhấn (cho cảm giác tương tác tốt hơn trên mobile) */
+        .social-icons a:active {
+            transform: scale(1.1);
+        }
+
+        .social-icons img {
+            width: 42px; /* Kích thước icon vừa vặn ngón tay cái */
+            height: 42px;
+            border-radius: 10px; /* Bo góc icon nhẹ */
+            object-fit: contain;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* === LOCKET (ICON THỨ TƯ) - BO GÓC RIÊNG === */
+        .social-icons a:nth-child(4) img {
+            border-radius: 22%; /* Bo góc đặc trưng của Locket */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="left-column">
+            <img src="toi.jpg" alt="Phạm Ngọc Huỳnh">
+        </div>
+
+        <div class="right-column">
+            <h1>PHẠM NGỌC HUỲNH</h1>
+            
+            <div class="info-list">
+                <p><strong>Ngày sinh:</strong> 25/05/2007</p>
+                <p><strong>Mã SV:</strong> 25000152</p>
+                <p><strong>Quê quán:</strong> xã Thiên Nhẫn, Nghệ An</p>
+                <p><strong>SĐT:</strong> 0367772253</p>
+                <p><strong>Gmail:</strong> 25000152@hus.edu.vn</p>
+                <p><strong>Sở thích:</strong> code, rap, bóng đá, khoa học</p>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" target="_blank" title="Instagram">
+                    <img src="instagram.jpg" alt="Instagram">
+                </a>
+                <a href="#" target="_blank" title="Facebook">
+                    <img src="facebook.jpg" alt="Facebook">
+                </a>
+                <a href="#" target="_blank" title="Zalo">
+                    <img src="zalo.png" alt="Zalo">
+                </a>
+                <a href="#" target="_blank" title="Locket">
+                    <img src="locket.jpg" alt="Locket">
+                </a>
+                <a href="#" target="_blank" title="TikTok">
+                    <img src="tiktok.png" alt="TikTok">
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
